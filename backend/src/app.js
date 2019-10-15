@@ -2,6 +2,7 @@ const app = require('express')()
 const consign = require('consign')
 
 consign({ verbose: true, cwd: 'src' })
-    .include('middlewares')
+    .include('database')
+    .then('middlewares')
     .then('server')
     .into(app)
