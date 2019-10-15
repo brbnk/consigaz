@@ -5,7 +5,8 @@ const { connection_string } = require('../environment/vars')
 module.exports = () => { 
     mongoose.connect(connection_string, { 
         useUnifiedTopology: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useCreateIndex: true
     })
 
     mongoose.connection.on('connected', () => { 
