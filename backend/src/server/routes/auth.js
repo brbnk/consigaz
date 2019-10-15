@@ -1,9 +1,15 @@
+const passport = require('passport')
 const router = require('express').Router()
-const UsersController = require('../../controllers/AuthController')
+const AuthController = require('../../controllers/AuthController')
 
 module.exports = app => { 
-    router.route('/register')
-        .post(UsersController.register)
+    router.get('/', 
+        passport.authenticate('google', { scope: ['profile', 'email'] }))
+        
+    router.get('/callback', 
+        passport.authenticate('google', { session: false }), 
+        AuthController.login
+    )
 
-    app.use('/auth', router)
+    app.use('/auth/google', router)
 }
