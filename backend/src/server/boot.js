@@ -1,5 +1,7 @@
+const { port, api } = require('../environment/vars')
+
 module.exports = app => { 
-    app.listen(3000, () => { 
-        console.log(`Server is listenning on port ${ 3000 }`)
+    app.listen(port, () => { 
+        console.log(`\nServer is listenning on ${api}:${port}`)
     })
 }
