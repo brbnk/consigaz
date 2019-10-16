@@ -1,31 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from '../store/store'
+import AppProviders from '../context/index'
+import { useAuth } from '../context/auth-context'
 
-import Login from './Login/login'
-import Home from './Home/home'
-import PrivateRoute from './routes/private-wrapper'
+const Login = React.lazy(() => import('./Login/login'))
+const Home = React.lazy(() => import('./Home/home'))
 
-const App = () => { 
+function App() { 
+    const { authenticated } = useAuth()
     return (
-        <Provider store={store}> 
-            <Router> 
-                <Switch> 
-                    <Redirect exact from='/' to='/home' />
-                    <Route path='/login' component={Login} />
-                    <PrivateRoute path="/home">
-                        <Home />
-                    </PrivateRoute>
-                </Switch>
-            </Router>
-        </Provider>
+        <React.Suspense fallback={<div> Loading... </div> }> 
+            { authenticated ? <Home /> : <Login /> }
+        </React.Suspense>
     )
 }
 
 ReactDOM.render(
-    <App />,
+    <AppProviders> 
+        <App />
+    </AppProviders>,
     document.getElementById('app')
 )
 

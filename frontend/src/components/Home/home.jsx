@@ -1,12 +1,13 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-
 import Dashboard from './Dashboard/dashboard'
+import './home.scss'
 
 const Home = () => { 
-    return (<> 
-        <Route path="/home/dashboard" component={ Dashboard } />
-    </>)
+    return (
+        <div className="container"> 
+            <h1> Hello </h1>
+        </div>
+    )
 }
 
 export default Home
