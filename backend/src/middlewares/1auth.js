@@ -44,12 +44,23 @@ passport.use(new GoogleStrategy({
 )
 
 // Jason Web Tokens (JWT) Authentication Strategy
+const jwtExtractorFromCookie = (req) => { 
+    let token = null
+
+    if (req && req.cookies) { 
+        token = req.cookies['jwt']
+    }
+
+    return token
+} 
+
 const options = { 
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: jwtExtractorFromCookie,
     secretOrKey: jwt_secret
 }
 
 passport.use(new JwtStrategy(options, (payload, done) => {
+    console.log(payload)
     User.findOne({ _id: payload._id }, (err, user) => { 
         if (err) { 
             return done(err, false)

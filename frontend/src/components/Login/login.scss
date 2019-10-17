@@ -1,4 +1,52 @@
-.login-container { 
+@import '../../assets/styles/colors';
+
+.login { 
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     height: 100vh;
-    background-color: tomato;
+    background-image: radial-gradient($light-bkg, $dark-bkg);
+    
+    .logo { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: auto;
+
+        img { 
+            width: 80px;
+            height: 160px;
+            margin-right: 20px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            color: $dark-contrast-text;
+            letter-spacing: 10px;
+            font-family: 'SSExbFLF';
+            font-size: 100px;
+        }
+    }
+
+    .signin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        border-radius: 100%;
+        background-color: $google-btn;
+        width: 150px;
+        height: 150px;
+        cursor: pointer;
+        transition: all 1s;
+        
+        img { 
+            width: 70px;
+            height: 70px;
+        }
+
+        &:hover {
+            background-color: $fire;
+        }
+    }
 }

@@ -4,6 +4,10 @@ const AuthController = require('../../controllers/AuthController')
 
 module.exports = app => { 
     router.get('/', 
+        (req, res, next) => { 
+            app.set('sessionId', req.query.socketId)
+            next() 
+        },
         passport.authenticate('google', { scope: ['profile', 'email'] }))
         
     router.get('/callback', 
