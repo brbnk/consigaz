@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+
 import AppProviders from '../context/index'
 import { useAuth } from '../context/auth-context'
 
@@ -8,16 +10,20 @@ const Home = React.lazy(loadProtectedSide)
 const Login = React.lazy(() => import('./Login/login'))
 
 function App() { 
-    let { authenticated }= useAuth()
-
+    const { state } = useAuth()
+    
     React.useEffect(() => { 
         loadProtectedSide()
     }, [])
 
     return (
-        <React.Suspense fallback={<div> Loading... </div> }> 
-            { authenticated ? <Home /> : <Login /> }
-        </React.Suspense>
+        <Router> 
+            <Switch>
+                <React.Suspense fallback={ <div> Loading... </div> }> 
+                    { true ? <Home /> : <Login /> } 
+                </React.Suspense>
+            </Switch>
+        </Router>
     )
 }
 

@@ -5,28 +5,30 @@ import React from 'react'
 
 const AuthContext = React.createContext()
 
-const INITIAL_STATE = false
+const INITIAL_STATE = {
+    authenticated: false,
+    user: { }
+}
 
 const reducer = (state, action) => { 
-    console.log(action.state)
     switch(action.type) { 
         case 'AUTHORIZE':
         case 'UNAUTHORIZE':
-            return action.state
+            return { ...action.payload }
         default:
-            action.state
+            state
     }
 }
 
 function AuthProvider(props) { 
-    const [authenticated, dispatch] = React.useReducer(reducer, INITIAL_STATE)
+    const [state, dispatch] = React.useReducer(reducer, INITIAL_STATE)
     
     return (
         <AuthContext.Provider 
             value={{ 
-                authenticated,
-                authorize: () => dispatch({ type: 'AUTHORIZE', state: true }),
-                unauthorize: () => dispatch({ type: 'UNAUTHORIZE', state: false }) 
+                state,
+                authorize: (user) => dispatch({ type: 'AUTHORIZE', payload: { user, authenticated: true }}),
+                unauthorize: () => dispatch({ type: 'UNAUTHORIZE', payload: { user: {}, authenticated: false }})
             }} {...props} 
         />
     )

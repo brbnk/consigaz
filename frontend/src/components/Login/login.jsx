@@ -22,12 +22,10 @@ const Login = () => {
     })
 
     React.useEffect(() => { 
-        socket.on('google', token => { 
-            localStorage.setItem('jwt', token)
+        socket.on('google', res => { 
+            localStorage.setItem('jwt', res.token)
             popupWindow.close()
-            authorize(
-                
-            )
+            authorize(res.user)
         })
     }, [])
 

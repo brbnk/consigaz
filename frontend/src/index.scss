@@ -4,12 +4,16 @@
     src: url("./assets/fonts/sansserifexbflf-italic.otf");
 }
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
 /* General */
 body, html { 
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     outline: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 
 *, *::before, *::after { 
@@ -18,4 +22,9 @@ body, html {
 
 h1, h2, h3, h4, h5 { 
     margin: 0;
+}
+
+a { 
+    color: white;
+    text-decoration: none;
 }

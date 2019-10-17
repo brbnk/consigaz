@@ -1,12 +1,22 @@
 import React from 'react'
-import Dashboard from './Dashboard/dashboard'
-import './home.scss'
+import styled from 'styled-components'
 
-const Home = () => { 
+import Sidebar from './Sidebar/sidebar'
+import Main from './Main/main'
+
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+`
+
+function Home() { 
     return (
-        <div className="container"> 
-            <h1> Hello </h1>
-        </div>
+        <Container>
+            <Sidebar /> 
+            <Main />
+        </Container>
     )
 }
 

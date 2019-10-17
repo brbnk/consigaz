@@ -16,7 +16,7 @@ module.exports = {
         const io = req.app.get('io')
         const sessionId = req.app.get('sessionId')
 
-        io.in(sessionId).emit('google', token)
+        io.in(sessionId).emit('google', { user, token })
         res.end()
     }
 }
