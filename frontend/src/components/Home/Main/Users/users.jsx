@@ -1,11 +1,15 @@
 import React from 'react'
-import { Title } from '../styles'
+import Table from './table'
+import Header from '../Common/header'
+
+import { Container } from '../styles'
 
 function Users() { 
     return (
-        <>
-            <Title> Usuários </Title>
-        </>
+        <Container> 
+            <Header title='Usuários' /> 
+            <Table />
+        </Container>
     )
 }
 
