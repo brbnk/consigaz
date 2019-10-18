@@ -6,26 +6,11 @@ import {
 } from '@material-ui/core/styles'
 import MaterialTable from 'material-table'
 
-import api from '../../../../services/api'
-
-function Table() { 
-    const [data, setData] = React.useState([])
-    const [userAdded, setUserAdded] = React.useState('')
-    const [userDeleted, setUserDeleted] = React.useState({})
-    const [userUpdated, setUpdateUser] = React.useState({})
-
-    React.useEffect(() => { 
-        (async function() {
-            await api.get('/users/all')
-                .then(({ data }) => { 
-                    setData(data.users)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        })()
-    }, [userAdded, userDeleted, userUpdated])
-
+function Table({ data, onAdd, onUpdate, onDelete, columns }) { 
+    const [Add, SetAddEvent] = onAdd
+    const [Update, SetUpdateEvent] = onUpdate
+    const [Delete, SetDeleteEvent] = onDelete
+    
     return( 
         <MuiThemeProvider theme={theme}>
             <MaterialTable 
@@ -41,24 +26,10 @@ function Table() {
                     actionsColumnIndex: -1,
                 }}
                 editable={{
-                    onRowAdd: async ({ email }) => {
-                        return await api.post('/users/insert', { email })
-                            .then(_ => setUserAdded(email))
-                    },
-                    onRowUpdate: async(newData, oldData) => {
-                        const { _id } = oldData
-                        const { photo, name, email } = newData
-                        const changes = { ...oldData, name, photo, email }
-                        
-                        return await api.put(`/users/update/${_id}`, changes)
-                            .then(res => setUpdateUser(res.message))
-                    },
-                    onRowDelete: async (oldData) => { 
-                        const { _id } = oldData
-                        await api.delete(`/users/delete/${_id}`)
-                            .then(res => setUserDeleted(res.message))
-                    }
-                  }}
+                    onRowAdd: (data) => Add(data, SetAddEvent),
+                    onRowUpdate: (newData, oldData) => Update(newData, oldData, SetUpdateEvent),
+                    onRowDelete: (data) => Delete(data)
+                }}
             />
         </MuiThemeProvider>
     )
@@ -179,16 +150,5 @@ const theme = createMuiTheme({
         }
     }
 })
-
-const columns = [
-    { 
-        title: 'Avatar', 
-        field: 'photo', 
-        render: data => <img src={data.photo} style={{ width: 50, height: 50, borderRadius: '100%'}} />
-    }, 
-    { title: 'Nome', field: 'name' },
-    { title: 'Email', field: 'email' },
-    { title: 'Criado', field: 'createdAt', render: data => new Date(data.createdAt).toLocaleDateString() },
-]
 
 export default withStyles(null, { withTheme: true })(Table)

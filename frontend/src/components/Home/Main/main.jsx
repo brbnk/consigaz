@@ -1,4 +1,4 @@
-import React, { lazy, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Route, Redirect, Switch, __RouterContext } from 'react-router-dom'
 import { useTransition, animated } from 'react-spring'
 import styled from 'styled-components'
@@ -6,30 +6,14 @@ import styled from 'styled-components'
 import LoadSpinner from '../../Utils/spinner'
 import AccountOptions from '../Main/Common/options'
 
-const timeToLoadComponent = 200
-const Dashboard = lazy(async () => {
-    const [moduleExports] = await Promise.all([
-        import('./Dashboard/dashboard'),
-        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
-    ])
-    return moduleExports
-})
-
-const Reports = lazy(async () => {
-    const [moduleExports] = await Promise.all([
-        import('./Reports/reports'),
-        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
-    ])
-    return moduleExports
-})
-
-const Users = lazy(async () => {
-    const [moduleExports] = await Promise.all([
-        import('./Users/users'),
-        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
-    ])
-    return moduleExports
-})
+import { 
+    Dashboard, 
+    Reports, 
+    Users,
+    Management,
+    Employees,
+    Stores 
+} from './lazyComponents'
 
 const Container = styled.div`
     padding: 10px 40px;
@@ -56,6 +40,9 @@ function Main() {
                             <Route path='/dashboard' component={Dashboard} />
                             <Route path='/reports' component={Reports} />
                             <Route path='/users' component={Users} />
+                            <Route path='/employees' component={Employees} />
+                            <Route path='/stores' component={Stores} />
+                            <Route path='/management' component={Management} />
                         </Switch>
                     </animated.div>
                 ))}

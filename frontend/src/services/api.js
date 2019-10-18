@@ -12,9 +12,7 @@ const getToken = () => {
 
 const token = getToken()
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: 'http://localhost:3000/',
     headers: { 'Authorization': `bearer ${token}`}
 })
-
-export default api

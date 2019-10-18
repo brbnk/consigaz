@@ -18,7 +18,7 @@ function App() {
 
     return (
         <React.Suspense fallback={ <LoadSpinner /> }> 
-            { true ? <Home /> : <Login /> } 
+            { state.authenticated ? <Home /> : <Login /> } 
         </React.Suspense>
     )
 }

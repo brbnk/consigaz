@@ -92,8 +92,23 @@ function Sidebar() {
                     </Link> 
                 </Item>
                 <Item> 
+                    <Link to='/employees'> 
+                        <animated.i style={opacity} className='material-icons'> people </animated.i>
+                    </Link> 
+                </Item>
+                <Item> 
+                    <Link to='/stores'> 
+                        <animated.i style={opacity} className='material-icons'> emoji_transportation </animated.i>
+                    </Link> 
+                </Item>
+                <Item> 
+                    <Link to='/management'> 
+                        <animated.i style={opacity} className='material-icons'> attach_money </animated.i>
+                    </Link> 
+                </Item>
+                <Item> 
                     <Link to='/users'> 
-                        <animated.i style={opacity} className='material-icons'> account_circle </animated.i>
+                        <animated.i style={opacity} className='material-icons'> person </animated.i>
                     </Link> 
                 </Item>
             </Lista>
