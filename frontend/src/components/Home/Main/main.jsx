@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 
-import Dashboard from './Dashboard/dashboard'
-import Reports from './Reports/reports'
-import Users from './Users/users'
+const Dashboard = lazy(() => import('./Dashboard/dashboard'))
+const Reports = lazy(() => import('./Reports/reports'))
+const Users = lazy(() => import('./Users/users'))
 
 const Container = styled.div`
     padding: 10px 40px;
@@ -16,10 +16,12 @@ function Main() {
     return (
         <>
             <Container> 
-                <Redirect exact from='/' to='/dashboard'/>
-                <Route path='/dashboard' component={Dashboard} />
-                <Route path='/reports' component={Reports} />
-                <Route path='/users' component={Users} />
+                <React.Suspense fallback={<h1> Loading... </h1>}>
+                    <Redirect exact from='/' to='/dashboard'/>
+                    <Route path='/dashboard' component={Dashboard} />
+                    <Route path='/reports' component={Reports} />
+                    <Route path='/users' component={Users} />
+                </React.Suspense>
             </Container>
         </>
     )

@@ -20,7 +20,7 @@ function App() {
         <Router> 
             <Switch>
                 <React.Suspense fallback={ <div> Loading... </div> }> 
-                    { true ? <Home /> : <Login /> } 
+                    { state.authenticated ? <Home /> : <Login /> } 
                 </React.Suspense>
             </Switch>
         </Router>

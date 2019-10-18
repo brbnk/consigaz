@@ -6,7 +6,26 @@ import {
 } from '@material-ui/core/styles'
 import MaterialTable from 'material-table'
 
+import api from '../../../../services/api'
+
 function Table() { 
+    const [data, setData] = React.useState([])
+    const [userAdded, setUserAdded] = React.useState('')
+    const [userDeleted, setUserDeleted] = React.useState({})
+    const [userUpdated, setUpdateUser] = React.useState({})
+
+    React.useEffect(() => { 
+        (async function() {
+            await api.get('/users/all')
+                .then(({ data }) => { 
+                    setData(data.users)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })()
+    }, [userAdded, userDeleted, userUpdated])
+
     return( 
         <MuiThemeProvider theme={theme}>
             <MaterialTable 
@@ -19,36 +38,26 @@ function Table() {
                         color: '#FFF',
                         fontFamily: 'inherit'
                     },
-                    actionsColumnIndex: -1
+                    actionsColumnIndex: -1,
                 }}
                 editable={{
-                    onRowAdd: newData =>
-                      new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                          {
-                            
-                          }
-                          resolve()
-                        }, 1000)
-                      }),
-                    onRowUpdate: (newData, oldData) =>
-                      new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                          {
-                            
-                          }
-                          resolve()
-                        }, 1000)
-                      }),
-                    onRowDelete: oldData =>
-                      new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                          {
-                            
-                          }
-                          resolve()
-                        }, 1000)
-                      }),
+                    onRowAdd: async ({ email }) => {
+                        return await api.post('/users/insert', { email })
+                            .then(_ => setUserAdded(email))
+                    },
+                    onRowUpdate: async(newData, oldData) => {
+                        const { _id } = oldData
+                        const { photo, name, email } = newData
+                        const changes = { ...oldData, name, photo, email }
+                        
+                        return await api.put(`/users/update/${_id}`, changes)
+                            .then(res => setUpdateUser(res.message))
+                    },
+                    onRowDelete: async (oldData) => { 
+                        const { _id } = oldData
+                        await api.delete(`/users/delete/${_id}`)
+                            .then(res => setUserDeleted(res.message))
+                    }
                   }}
             />
         </MuiThemeProvider>
@@ -171,14 +180,15 @@ const theme = createMuiTheme({
     }
 })
 
-const columns = [ 
+const columns = [
+    { 
+        title: 'Avatar', 
+        field: 'photo', 
+        render: data => <img src={data.photo} style={{ width: 50, height: 50, borderRadius: '100%'}} />
+    }, 
     { title: 'Nome', field: 'name' },
     { title: 'Email', field: 'email' },
-    { title: 'Criado', field: 'createdAt' },
-]
-
-const data = [ 
-    
+    { title: 'Criado', field: 'createdAt', render: data => new Date(data.createdAt).toLocaleDateString() },
 ]
 
 export default withStyles(null, { withTheme: true })(Table)

@@ -1,7 +1,16 @@
 import axios from 'axios'
 
-const token = document.cookie
-    .replace(/(?:(?:^|.*;\s*)jwt\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+const getToken = () => { 
+    let token = localStorage.getItem('jwt')
+
+    if (!token) { 
+        return ''
+    }
+
+    return token
+}
+
+const token = getToken()
 
 const api = axios.create({
     baseURL: 'http://localhost:3000/',
