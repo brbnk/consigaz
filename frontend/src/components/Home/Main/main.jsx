@@ -3,10 +3,33 @@ import { Route, Redirect, Switch, __RouterContext } from 'react-router-dom'
 import { useTransition, animated } from 'react-spring'
 import styled from 'styled-components'
 
+import LoadSpinner from '../../Utils/spinner'
 import AccountOptions from '../Main/Common/options'
-const Dashboard = lazy(() => import('./Dashboard/dashboard'))
-const Reports = lazy(() => import('./Reports/reports'))
-const Users = lazy(() => import('./Users/users'))
+
+const timeToLoadComponent = 200
+const Dashboard = lazy(async () => {
+    const [moduleExports] = await Promise.all([
+        import('./Dashboard/dashboard'),
+        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
+    ])
+    return moduleExports
+})
+
+const Reports = lazy(async () => {
+    const [moduleExports] = await Promise.all([
+        import('./Reports/reports'),
+        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
+    ])
+    return moduleExports
+})
+
+const Users = lazy(async () => {
+    const [moduleExports] = await Promise.all([
+        import('./Users/users'),
+        new Promise(resolve => setTimeout(resolve, timeToLoadComponent))
+    ])
+    return moduleExports
+})
 
 const Container = styled.div`
     padding: 10px 40px;
@@ -25,7 +48,7 @@ function Main() {
     return (
         <Container> 
             <AccountOptions />
-            <React.Suspense fallback={<h1> Loading... </h1>}>
+            <React.Suspense fallback={ <LoadSpinner /> }>
                 {transitions.map(({ item, props, key }) => (
                     <animated.div key={key} style={{...props, height: '100%', position:'absolute', width: 'calc(100vw - 200px)' }}> 
                         <Switch location={item}> 

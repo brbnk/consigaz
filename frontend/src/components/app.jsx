@@ -7,6 +7,7 @@ import { useAuth } from '../context/auth-context'
 const loadProtectedSide = () => import('./Home/home') 
 const Home = React.lazy(loadProtectedSide)
 const Login = React.lazy(() => import('./Login/login'))
+import LoadSpinner from './Utils/spinner'
 
 function App() { 
     const { state } = useAuth()
@@ -16,7 +17,7 @@ function App() {
     }, [])
 
     return (
-        <React.Suspense fallback={ <div> Loading... </div> }> 
+        <React.Suspense fallback={ <LoadSpinner /> }> 
             { true ? <Home /> : <Login /> } 
         </React.Suspense>
     )
