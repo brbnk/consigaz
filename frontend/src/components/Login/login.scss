@@ -5,7 +5,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     height: 100vh;
-    background-image: radial-gradient($light-bkg, $dark-bkg);
+    background-image: radial-gradient($home, $dark-bkg);
     
     .logo { 
         display: flex;
@@ -34,7 +34,7 @@
         align-items: center;
         margin: auto;
         border-radius: 100%;
-        background-color: $google-btn;
+        background-color: $home;
         width: 150px;
         height: 150px;
         cursor: pointer;

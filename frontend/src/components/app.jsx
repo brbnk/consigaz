@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import AppProviders from '../context/index'
 import { useAuth } from '../context/auth-context'
@@ -17,13 +16,9 @@ function App() {
     }, [])
 
     return (
-        <Router> 
-            <Switch>
-                <React.Suspense fallback={ <div> Loading... </div> }> 
-                    { state.authenticated ? <Home /> : <Login /> } 
-                </React.Suspense>
-            </Switch>
-        </Router>
+        <React.Suspense fallback={ <div> Loading... </div> }> 
+            { true ? <Home /> : <Login /> } 
+        </React.Suspense>
     )
 }
 

@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { useAuth } from '../../../../context/auth-context'
 
 const Container = styled.div`
+    position: absolute;
+    right: 20px;
+    margin: 20px;
+
     img { 
         width: 40px;
         height: 40px;

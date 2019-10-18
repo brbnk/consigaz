@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSpring, animated } from 'react-spring'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -19,19 +20,25 @@ const Lista = styled.ul`
 `;
 
 const Item = styled.li`
-    transition: all .3s;
-    border-left: 2px solid #212B34; 
+    display: flex;
+    justify-content: center;    
+    transition: all .5s;
+    border-left: 3px solid #212B34; 
 
     &:hover { 
         background-color: white;
-        border-left: 2px solid #FF0000;
     }
 
     i { 
-        padding: 10px;
+        padding: 30px;
         margin-right: 10px;
-        font-size: 2.5em !important;
-        color: #FF0000;
+        font-size: 2em !important;
+        color: white;
+        transition: all .5s;
+
+        &:hover { 
+            color: #212B34;
+        }
     }
 
     a { 
@@ -40,10 +47,7 @@ const Item = styled.li`
         letter-spacing: 2px;
         text-transform: uppercase;
         font-size: 1em;
-
-        &:hover { 
-            color: #333;
-        }
+        transition: all .5s;
     }
 `
 
@@ -55,36 +59,41 @@ const Logo = styled.div`
     letter-spacing: 5px;
 
     img { 
-        width: 20px;
+        color: white;   
+        width: 25px;
         height: 80px;
         margin-right: 10px;
     }
 `
 
 function Sidebar() { 
+    const opacity = useSpring({ 
+        from: { opacity: 0 },
+        opacity: 1,
+        config: { 
+            duration: 1000
+        }
+    })
+
     return (
         <Container> 
             <Logo> 
-                <img src="images/consigaz.svg"/>
-                <h1> Consigaz </h1>
+                <animated.img style={opacity} src="images/consigaz.svg"/>
             </Logo>
             <Lista>
                 <Item> 
                     <Link to='/dashboard'> 
-                        <i className='material-icons'> dashboard </i>
-                        Dashboard 
+                        <animated.i style={opacity} className='material-icons'> dashboard </animated.i>
                     </Link> 
                 </Item>
                 <Item> 
                     <Link to='/reports'> 
-                        <i className='material-icons'> timeline </i>
-                        Relatórios 
+                        <animated.i style={opacity} className='material-icons'> timeline </animated.i>
                     </Link> 
                 </Item>
                 <Item> 
                     <Link to='/users'> 
-                        <i className='material-icons'> account_circle </i>
-                        Usuários     
+                        <animated.i style={opacity} className='material-icons'> account_circle </animated.i>
                     </Link> 
                 </Item>
             </Lista>

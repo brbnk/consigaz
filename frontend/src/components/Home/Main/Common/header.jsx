@@ -6,7 +6,6 @@ function Header({ title }) {
     return(
         <HeaderContainer>
             <Title> { title } </Title>
-            <AccountOptions />
         </HeaderContainer>
     )
 }
