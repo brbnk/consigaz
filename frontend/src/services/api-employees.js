@@ -9,3 +9,9 @@ export const GetAllEmployees = async (setData) => {
             console.log(err)
         })
 }
+
+export const GetAllEmployeesToMap = async () => { 
+    return await api.get('/employees/all')
+        .then(({ data }) => data)
+        .catch(err => console(err))
+}

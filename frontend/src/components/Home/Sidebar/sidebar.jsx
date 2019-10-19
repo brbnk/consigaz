@@ -101,6 +101,11 @@ function Sidebar() {
                     </Link> 
                 </Item>
                 <Item> 
+                    <Link to='/management'> 
+                        <animated.i style={opacity} className='material-icons'> attach_money </animated.i>
+                    </Link> 
+                </Item>
+                <Item> 
                     <Link to='/reports'> 
                         <animated.i style={opacity} className='material-icons'> timeline </animated.i>
                     </Link> 
@@ -113,11 +118,6 @@ function Sidebar() {
                 <Item> 
                     <Link to='/stores'> 
                         <animated.i style={opacity} className='material-icons'> emoji_transportation </animated.i>
-                    </Link> 
-                </Item>
-                <Item> 
-                    <Link to='/management'> 
-                        <animated.i style={opacity} className='material-icons'> attach_money </animated.i>
                     </Link> 
                 </Item>
                 <Item> 
