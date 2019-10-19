@@ -2,8 +2,7 @@ import React from 'react'
 import { Container } from '../styles'
 import Header from '../Common/header'
 import Table from '../Common/table'
-import { api } from '../../../../services/api'
-import { GetAllStores } from '../../../../services/api-stores'
+import { GetStoresToMapLookup } from '../../../../services/api-stores'
 import { GetAllEmployees } from '../../../../services/api-employees'
 
 function Employees() {
@@ -20,10 +19,10 @@ function Employees() {
 
     React.useEffect(() => {
         (async () => { 
-            const stores = GetAllStores()      
-            const employees = GetAllEmployees(setData)
+            const stores = await GetStoresToMapLookup()   
+            const employees = await GetAllEmployees(setData)
 
-            let lookup = stores.data.stores.reduce((acc, val) => { 
+            let lookup = stores.reduce((acc, val) => { 
                 acc[val._id] = val.city
                 return acc
             }, {})

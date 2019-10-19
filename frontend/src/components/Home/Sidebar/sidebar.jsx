@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../../context/auth-context'
 
 import styled from 'styled-components'
 
@@ -17,6 +18,16 @@ const Lista = styled.ul`
     margin: 0 !important;
     padding: 0 !important;
     margin-top: 20px !important;
+
+    img { 
+        position: relative;
+        margin: 0 !important;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        left: 50%;
+        transform: translate(-58%, 50%);
+    }
 `;
 
 const Item = styled.li`
@@ -75,6 +86,9 @@ function Sidebar() {
         }
     })
 
+    const { state } = useAuth()
+    const src = state.user.photo ? state.user.photo : 'images/account.png' 
+
     return (
         <Container> 
             <Logo> 
@@ -111,6 +125,7 @@ function Sidebar() {
                         <animated.i style={opacity} className='material-icons'> person </animated.i>
                     </Link> 
                 </Item>
+                <img src={src} />
             </Lista>
         </Container>
     )

@@ -4,7 +4,7 @@ import { useTransition, animated } from 'react-spring'
 import styled from 'styled-components'
 
 import LoadSpinner from '../../Utils/spinner'
-import AccountOptions from '../Main/Common/options'
+import Time from '../Main/Common/time'
 
 import { 
     Dashboard, 
@@ -31,7 +31,7 @@ function Main() {
 
     return (
         <Container> 
-            <AccountOptions />
+            <Time />
             <React.Suspense fallback={ <LoadSpinner /> }>
                 {transitions.map(({ item, props, key }) => (
                     <animated.div key={key} style={{...props, height: '100%', position:'absolute', width: 'calc(100vw - 200px)' }}> 

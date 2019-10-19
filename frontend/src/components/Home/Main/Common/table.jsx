@@ -65,7 +65,7 @@ const theme = createMuiTheme({
             },
             body: {
                 fontFamily: 'inherit',
-                fontSize: '.75rem',
+                fontSize: '.8rem',
                 color: 'white'
             },
             paddingCheckbox: { 

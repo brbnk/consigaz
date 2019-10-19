@@ -9,3 +9,13 @@ export const GetAllStores = async (setData) => {
             console.log(err)
         })
 }
+
+export const GetStoresToMapLookup = async () => { 
+    return await api.get('/stores/show')
+        .then(({ data }) => { 
+            return data.stores
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
