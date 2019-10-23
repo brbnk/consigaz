@@ -24,7 +24,7 @@ export const UpdateUser = async (newData, oldData, onUpdate) => {
         .then(res => onUpdate(res.message))
 }
 
-export const DeleteUser = async ({ _id }) => { 
+export const DeleteUser = async ({ _id }, onDelete) => { 
     return await api.delete(`/users/delete/${_id}`)
         .then(res => onDelete(res.message))
 }

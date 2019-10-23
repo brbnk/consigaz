@@ -4,8 +4,11 @@ import { Container } from '../styles'
 import Header from '../Common/header'
 import Table from '../Common/table'
 import { 
-    GetAllStores 
-} from '../../../../services/api-stores'
+    GetAllStores,
+    AddStore,
+    UpdateStore,
+    DeleteStore 
+} from 'Api/api-stores'
 
 const columns = [
     { title: 'Cidade', field: 'city' },
@@ -30,9 +33,9 @@ function Stores() {
             <Header title='Lojas' /> 
             <Table 
                 data={data} 
-                onAdd={[null, setStoreAdded]}
-                onUpdate={[null, setStoreUpdated]}
-                onDelete={[null, setStoreDeleted]}
+                onAdd={[AddStore, setStoreAdded]}
+                onUpdate={[UpdateStore, setStoreUpdated]}
+                onDelete={[DeleteStore, setStoreDeleted]}
                 columns={columns}
             />
         </Container>

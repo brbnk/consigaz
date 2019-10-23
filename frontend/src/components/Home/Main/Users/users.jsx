@@ -8,7 +8,7 @@ import {
     UpdateUser, 
     DeleteUser, 
     GetAllUsers 
-} from '../../../../services/api-users'
+} from 'Api/api-users'
 
 
 const columns = [

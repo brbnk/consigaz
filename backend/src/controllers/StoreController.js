@@ -23,5 +23,28 @@ module.exports = {
 
             res.status(200).json({ message: 'Store Created!' })
         })
+    },
+    async update(req, res) { 
+        const { _id } = req.params
+        const store = req.body
+
+        await Store.updateOne({ _id }, store, err => { 
+            if (err) {
+                return res.status(500).json({ message: 'Error on update Store'})
+            }
+
+            return res.status(200).json({ message: 'Store updated!' })
+        })
+    },
+    async remove(req, res) { 
+        const { _id } = req.params
+
+        await Store.deleteOne({ _id }, err => { 
+            if (err) { 
+                return res.status(500).json({ message: 'Error on delete Store '})
+            }
+
+            return res.status(200).json({ message: 'Store deleted!' })
+        })
     }
 }

@@ -28,9 +28,9 @@ function Management() {
             <Header title='Controles' /> 
             <ManagementContainer>
                 <Navigator />
-                <Route exact path={`${url}`} component={Expenses}/>
+                <Route exact path={`${url}`} component={General}/>
                 <Route exact path={`${url}/deferred`} component={DeferredPayment}/>
-                <Route exact path={`${url}/expenses`} component={General}/>
+                <Route exact path={`${url}/expenses`} component={Expenses}/>
                 <Route exact path={`${url}/sales`} component={Sales}/>
                 <Route exact path={`${url}/stock`} component={Stock}/>
             </ManagementContainer>

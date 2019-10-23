@@ -24,9 +24,9 @@ function Navigator() {
     return (
         <NavContainer> 
             <NavLinks> 
-                <Link to='/management/general'> Geral </Link>
+                <Link to='/management'> Geral </Link>
                 <Link to='/management/deferred'> Vendas à Prazo </Link>
-                <Link to='/management'> Despesas </Link>
+                <Link to='/management/expenses'> Despesas </Link>
                 <Link to='/management/sales'> Vendas </Link>
                 <Link to='/management/stock'> Estoque </Link>
             </NavLinks>

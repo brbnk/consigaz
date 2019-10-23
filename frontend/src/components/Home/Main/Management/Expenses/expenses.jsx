@@ -7,6 +7,7 @@ import QuantitySelector from './Inputs/quantity-selector'
 import ResponsibleSecletor from './Inputs/responsible-selector'
 import AmountInput from './Inputs/amount-input'
 import CommentInput from './Inputs/comment-input'
+import { InsertExpenses } from 'Api/api-expenses'
 
 const ExpenseContainer = styled.div`
     display: grid;
@@ -127,6 +128,16 @@ function Expenses() {
         setTotal(sum)
    })
 
+   const handleSubmit = () => { 
+       let payload = Object.keys(cards).reduce((acc, card) => { 
+            return [...acc, cards[card]]
+       }, [])
+
+       InsertExpenses(payload).then(res => console.log(res))
+       setCards({})
+       setid(0)
+   }
+
    return (<>
         <ExpenseContainer>
             <HeaderContainer> 
@@ -143,7 +154,9 @@ function Expenses() {
                     }
                     { 
                         Object.keys(cards).length ? 
-                            (<SendButton> <i className="material-icons" title="Enviar Formulários"> send </i> </SendButton>) : null
+                            (<SendButton onClick={ handleSubmit }> 
+                                <i className="material-icons" title="Enviar Formulários"> send </i> 
+                            </SendButton>) : null
                     }
                 </div>
                 {

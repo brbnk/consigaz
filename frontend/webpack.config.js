@@ -34,7 +34,10 @@ module.exports = {
         ]
     },
     resolve: { 
-        extensions: [ '*', '.js', '.jsx', '.scss' ]
+        extensions: [ '*', '.js', '.jsx', '.scss' ],
+        alias: { 
+            Api: path.resolve(__dirname, 'src/services/')
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({ 

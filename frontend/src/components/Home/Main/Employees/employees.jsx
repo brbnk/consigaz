@@ -2,16 +2,23 @@ import React from 'react'
 import { Container } from '../styles'
 import Header from '../Common/header'
 import Table from '../Common/table'
-import { GetStoresToMapLookup } from '../../../../services/api-stores'
-import { GetAllEmployees } from '../../../../services/api-employees'
+import { GetStoresToMapLookup } from 'Api/api-stores'
+import { 
+    GetAllEmployees, 
+    AddEmployee,
+    UpdateEmployee,
+    DeleteEmployee 
+} from 'Api/api-employees'
 
 function Employees() {
-    const [columns, setColumns] = React.useState([
+    const columns = [
         { title: 'Nome', field: 'name' },
         { title: 'Celular', field: 'cellphone' },
         { title: 'Idade', field: 'age' },
         { title: 'Salário', field: 'salary.$numberDecimal', render: (data) => `R$ ${data.salary.$numberDecimal}`}
-    ])
+    ]
+
+    const [lookup, setLookup] = React.useState({})
     const [data, setData] = React.useState([])
     const [employeeAdded, setEmployeeAdded] = React.useState('')
     const [employeeDeleted, setEmployeeDeleted] = React.useState({})
@@ -27,7 +34,7 @@ function Employees() {
                 return acc
             }, {})
 
-            setColumns([...columns, { title: 'Loja', field: 'store._id', lookup }])
+            setLookup({ title: 'Loja', field: 'store._id', lookup })
         })()
     }, [employeeAdded, employeeDeleted, employeeUpdated])
 
@@ -36,10 +43,10 @@ function Employees() {
             <Header title='Funcionários' /> 
             <Table  
                 data={data} 
-                onAdd={[null, setEmployeeAdded]}
-                onUpdate={[null, setEmployeeUpdated]}
-                onDelete={[null, setEmployeeDeleted]}
-                columns={columns}
+                onAdd={[AddEmployee, setEmployeeAdded]}
+                onUpdate={[UpdateEmployee, setEmployeeUpdated]}
+                onDelete={[DeleteEmployee, setEmployeeDeleted]}
+                columns={[...columns, lookup]}
             />
         </Container>
     )

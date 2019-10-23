@@ -28,7 +28,7 @@ function Table({ data, onAdd, onUpdate, onDelete, columns }) {
                 editable={{
                     onRowAdd: (data) => Add(data, SetAddEvent),
                     onRowUpdate: (newData, oldData) => Update(newData, oldData, SetUpdateEvent),
-                    onRowDelete: (data) => Delete(data)
+                    onRowDelete: (data) => Delete(data, SetDeleteEvent)
                 }}
             />
         </MuiThemeProvider>
