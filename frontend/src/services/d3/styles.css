@@ -1,0 +1,23 @@
+.d3-tip { 
+    line-height: 1;
+    padding: 6px;
+    background: rgba(0, 0, 0, .9);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.d3-tip div { 
+    display: grid;
+    grid-template-columns: .7fr .3fr;
+    grid-template-rows: 30px;
+    grid-gap: 5px;
+    align-items: center;
+    font-size: .8em;
+    padding: 2px;
+    min-width: 400px;
+}
+
+.d3-tip div span:last-child { 
+    padding-left: 60px;
+}

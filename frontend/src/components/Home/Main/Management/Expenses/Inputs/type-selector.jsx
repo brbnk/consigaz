@@ -23,8 +23,18 @@ const useStyles = makeStyles(theme => ({
 
 function TypeSelector({ expenseTypeHandler }) { 
     const [ cards, id, setter ] = expenseTypeHandler
-    const classes = useStyles()
+    const [ types, setTypes ] = React.useState([
+        'Refeição/Marmitex',
+        'Combustível',
+        'Recarga de Celular',
+        'Pagamento de Água New Life',
+        'Material para uso da Loja',
+        'Salário',
+        'Serviços/Manutenções',
+        'Outros'
+    ])
 
+    const classes = useStyles()
     const handleChange = event => { 
         setter(oldValues => ({
             ...oldValues,
@@ -44,15 +54,11 @@ function TypeSelector({ expenseTypeHandler }) {
                 }}
                 className={ classes.input }
             > 
-                <MenuItem value={0}> - </MenuItem>
-                <MenuItem value={1}> Refeição/Marmitex </MenuItem>
-                <MenuItem value={2}> Combustível </MenuItem>
-                <MenuItem value={3}> Recarga de Celular </MenuItem>
-                <MenuItem value={4}> Pagamento de Água New Life </MenuItem>
-                <MenuItem value={5}> Material para uso da Loja </MenuItem>
-                <MenuItem value={6}> Salário </MenuItem>
-                <MenuItem value={7}> Serviços/Manutenções </MenuItem>
-                <MenuItem value={8}> Outros </MenuItem>
+            {
+                types.map((type) => { 
+                    return <MenuItem value={type} key={type}> {type} </MenuItem>
+                })
+            }
             </Select>
         </FormControl>
     )

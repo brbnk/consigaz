@@ -86,7 +86,6 @@ function StoreSelector({ expenseStoreHandler }) {
                 > 
                     {
                         Object.keys(stores).map((_id, key) => {
-                            console.log(stores)
                             return (
                                 <MenuItem value={_id} key={key}> {stores[_id]} </MenuItem>
                             )   

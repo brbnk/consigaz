@@ -13,7 +13,8 @@ export const HeaderContainer = styled.div`
 
 export const Container = styled.div`
     display: grid;
-    grid-template-rows: .1fr .9fr;
+    grid-template-rows: 1fr 9fr;
     grid-template-columns: 1fr;
     height: 100%;
+    width: 100%;
 `

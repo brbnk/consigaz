@@ -19,7 +19,7 @@ function LoadSpinner() {
             css={override}
             sizeUnit={"px"}
             size={50}
-            color={'#ff0000'}
+            color={'#00d8ff'}
         />
     )
 }

@@ -5,6 +5,7 @@ const ExpenseController = require('../../controllers/ExpenseController')
 module.exports = app => { 
     router.post('/insert', ExpenseController.insert)
     router.get('/all', ExpenseController.show)
+    router.get('/dashboard', ExpenseController.dashboard)
 
     app.use(
         '/expenses', 

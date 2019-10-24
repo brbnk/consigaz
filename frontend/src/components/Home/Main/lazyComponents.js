@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-const timeToLoadComponent = 300
+const timeToLoadComponent = 1500
 export const Dashboard = lazy(async () => {
     const [moduleExports] = await Promise.all([
         import('./Dashboard/dashboard'),
