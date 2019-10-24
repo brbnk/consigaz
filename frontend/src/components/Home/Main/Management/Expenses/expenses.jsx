@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import DatePicker from './Inputs/date-selector'
 import TypeSelector from './Inputs/type-selector'
 import QuantitySelector from './Inputs/quantity-selector'
-import ResponsibleSecletor from './Inputs/responsible-selector'
+import StoreSelector from './Inputs/store-selector'
 import AmountInput from './Inputs/amount-input'
 import CommentInput from './Inputs/comment-input'
 import { InsertExpenses } from 'Api/api-expenses'
@@ -147,7 +147,7 @@ function Expenses() {
                         Object.keys(cards).length < CARD_LIMIT ? 
                         (<AddExpense onClick={ () => {
                                 let newCards = { ...cards }
-                                newCards[id] = { amount: '0', type: 0, date: new Date(), responsible: 0, quantity: 0, comments: '' }
+                                newCards[id] = { amount: '0', type: 0, date: new Date(), store: 0, quantity: 0, comments: '' }
                                 setCards(newCards)
                                 setid(id + 1)
                             }} > <i className="material-icons" title="Adiconar Despesa"> add </i> </AddExpense>) : null
@@ -179,7 +179,7 @@ function Expenses() {
                                     </DoubleForm>
                                     <DoubleForm>
                                         <TypeSelector expenseTypeHandler={[cards, id, setCards]}/>
-                                        <ResponsibleSecletor expenseResponsibleHandler={[ cards, id, setCards ]} />
+                                        <StoreSelector expenseStoreHandler={[ cards, id, setCards ]} />
                                     </DoubleForm>
                                     <DoubleForm> 
                                         <AmountInput expenseAmountHandler={[ cards, id, setCards ]}/>

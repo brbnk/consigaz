@@ -32,6 +32,6 @@ export const UpdateEmployee = async (oldData, newData, onUpdate) => {
 }
 
 export const DeleteEmployee = async ({ _id }, onDelete) => { 
-    return await api.delete(w`${path}/remove/${_id}`)
+    return await api.delete(`${path}/remove/${_id}`)
         .then(res => onDelete(res))
 }

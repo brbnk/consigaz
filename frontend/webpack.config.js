@@ -36,7 +36,8 @@ module.exports = {
     resolve: { 
         extensions: [ '*', '.js', '.jsx', '.scss' ],
         alias: { 
-            Api: path.resolve(__dirname, 'src/services/')
+            Api: path.resolve(__dirname, 'src/services/api'),
+            D3: path.resolve(__dirname, 'src/service/d3')
         }
     },
     plugins: [

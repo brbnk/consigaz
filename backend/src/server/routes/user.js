@@ -9,5 +9,9 @@ module.exports = app => {
     router.put('/update/:_id', update)
 
 
-    app.use('/users', passport.authenticate('jwt', { session: false }), router)
+    app.use(
+        '/users', 
+        passport.authenticate('jwt', { session: false }), 
+        router
+    )
 }

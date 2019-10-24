@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
-import { GetAllEmployeesToMap } from 'Api/api-employees'
+import { GetStoresToMapLookup } from 'Api/api-stores'
 
 const useStyles = makeStyles(theme => ({ 
     root: { 
@@ -47,47 +47,48 @@ const theme = createMuiTheme({
     }
 })
 
-function ResponsibleSelector({ expenseResponsibleHandler }) { 
-    const [ cards, id, setter ] = expenseResponsibleHandler
-    const [ employees, setEmployees ] = React.useState({})
+function StoreSelector({ expenseStoreHandler }) { 
+    const [ cards, id, setter ] = expenseStoreHandler
+    const [ stores, setStore ] = React.useState({})
     const classes = useStyles()
 
     React.useEffect(() => { 
         (async () => { 
-            let { employees } = await GetAllEmployeesToMap()
-            let map = employees.reduce((acc, employee) => { 
-                acc[employee._id] = employee.name
+            let stores = await GetStoresToMapLookup()
+            let map = stores.reduce((acc, store) => { 
+                acc[store._id] = store.city
                 return acc
             }, {})
 
-            setEmployees(map)
+            setStore(map)
         })()
     }, [])
 
     const handleChange = event => { 
         setter(oldValues => ({
             ...oldValues,
-            [id]: {...oldValues[id], responsible: event.target.value }
+            [id]: {...oldValues[id], store: event.target.value }
         }))
     }
     
     return (
         <MuiThemeProvider theme={theme}>
             <FormControl className={ classes.formControl }>
-                <InputLabel htmlFor='expense-responsible'> Responsável </InputLabel>
+                <InputLabel htmlFor='expense-store'> Loja </InputLabel>
                 <Select
-                    value={cards[id]['responsible']}
+                    value={cards[id]['store']}
                     onChange={ handleChange }
                     inputProps={{
-                        name: 'responsible',
-                        id: 'expense-responsible'
+                        name: 'store',
+                        id: 'expense-store'
                     }}
                     className={ classes.input }
                 > 
                     {
-                        Object.keys(employees).map((_id, key) => {
+                        Object.keys(stores).map((_id, key) => {
+                            console.log(stores)
                             return (
-                                <MenuItem value={_id} key={key}> {employees[_id]} </MenuItem>
+                                <MenuItem value={_id} key={key}> {stores[_id]} </MenuItem>
                             )   
                         })
                     }
@@ -98,4 +99,4 @@ function ResponsibleSelector({ expenseResponsibleHandler }) {
     )
 }
 
-export default withStyles(null, { withTheme: true })(ResponsibleSelector)
+export default withStyles(null, { withTheme: true })(StoreSelector)

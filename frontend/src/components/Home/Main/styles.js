@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Title = styled.h2`
-    font-weight: normal;
+    font-weight: bold;
     letter-spacing: 3px;
 `
 

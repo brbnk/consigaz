@@ -15,9 +15,11 @@ function DatePicker({ datePickerHandler }) {
     const [cards, id, setter] = datePickerHandler
 
     const handleChange = date => { 
+        let formattedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+        
         setter(oldValues => ({ 
             ...oldValues,
-            [id]: { ...cards[id], date }
+            [id]: { ...cards[id], date: formattedDate }
         }))
     }
 
@@ -25,8 +27,10 @@ function DatePicker({ datePickerHandler }) {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <MuiThemeProvider theme={theme}>
                 <KeyboardDatePicker 
+                    disableToolbar
                     margin='normal'
-                    id='date-picker-dialog'
+                    variant='inline'
+                    id='date-picker-inline'
                     label='Data'
                     format='dd/MM/yyyy'
                     value={cards[id]['date']}

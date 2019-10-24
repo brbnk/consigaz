@@ -13,9 +13,9 @@ const ExpenseSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    responsible: { 
+    store: { 
         type: mongoose.Types.ObjectId,
-        ref: 'Employee'
+        ref: 'Store'
     },
     quantity: { 
         type: Number,
